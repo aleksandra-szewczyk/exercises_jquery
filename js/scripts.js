@@ -1,19 +1,33 @@
-$(document).ready(function() {
-    var span = $('span');
+$(function() {
+   var carouselList = $('#carousel ul');
     
-    span.each(function(index, element) {
-	   if(index % 2 == 0) {
-        $(element).css('color','red');
-	   };
+    function changeSlideNext() {
+        carouselList.animate({'marginLeft':-500}, 500, moveFirstSlideAfterLast);
+    };
+  
+    function moveFirstSlideAfterLast() {
+        var firstItem = carouselList.find("li:first");
+        var lastItem = carouselList.find("li:last");
+        
+        lastItem.after(firstItem);
+        carouselList.css({'marginLeft':0});
+    };
+    
+    function changeSlidePrevious() {
+        carouselList.animate({'marginLeft':0}, 500);
+    };
+    
+    function moveLastSlideBeforeFirst() {
+        firstItem.before(lastItem);
+        carouselList.css({'marginLeft': -500}, changeSlidePrevious)
+    };
+    
+    setInterval(changeSlideNext, 4000);
+    $('#next').click(function() {
+        changeSlideNext();
     });
-    
-    var paragraphs = $('p');
-    paragraphs.each(function(index, element) {
-        var button = '<button class="btn" data-tmp="' + index + '">Click me</button>';
-        $(element).append(button);
-    }); 
-    
-    $('button').click(function() {
-	   alert('Atrybut data-tmp ma wartość ' + $(this).attr('data-tmp'));
+    $('#previous').click(function() {
+        moveLastSlideBeforeFirst();
     });
+        
 });
