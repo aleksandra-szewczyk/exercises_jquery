@@ -2,14 +2,12 @@ $(function() {
    var carouselList = $('#carousel ul');
     
     function changeSlideNext() {
-        carouselList.animate({'marginLeft':-500}, 500, moveFirstSlideAfterLast);
+        carouselList.animate({'marginLeft':-900}, 500, moveFirstSlideAfterLast);
     };
   
     function moveFirstSlideAfterLast() {
-        var firstItem = carouselList.find("li:first");
-        var lastItem = carouselList.find("li:last");
         
-        lastItem.after(firstItem);
+        (carouselList.find('li:last')).after(carouselList.find('li:first'));
         carouselList.css({'marginLeft':0});
     };
     
@@ -18,8 +16,8 @@ $(function() {
     };
     
     function moveLastSlideBeforeFirst() {
-        firstItem.before(lastItem);
-        carouselList.css({'marginLeft': -500}, changeSlidePrevious)
+        (carouselList.find('li:first')).before(carouselList.find('li:last'));
+        carouselList.css({'marginLeft': -900}, changeSlidePrevious)
     };
     
     setInterval(changeSlideNext, 4000);
