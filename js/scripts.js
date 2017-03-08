@@ -27,12 +27,16 @@ $(function () {
         firstItem.before(lastItem);
     }
 
-    setInterval(next, 4000);
+    var timer = setInterval(next, 5000);
 
     $('#next').click(function () {
         next();
+        clearInterval(timer);
+        timer = setInterval(next, 5000);
     });
     $('#previous').click(function () {
         prev();
+        clearInterval(timer);
+        timer = setInterval(next, 5000);
     });
 });
